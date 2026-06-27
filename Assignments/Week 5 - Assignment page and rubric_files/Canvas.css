@@ -1,0 +1,5 @@
+/*
+* This will adjust the color and opacity of the Canvas login box. You must set the RGB values (first three numbers)and the opacity value
+*/
+.ic-Login__content {
+ /* background: rgba(27, 46, 132, 0.8);*/

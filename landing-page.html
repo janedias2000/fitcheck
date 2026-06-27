@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fit Check: Honest styling feedback</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #1A1A1A;
+      --dark:    #333333;
+      --mid:     #777777;
+      --light:   #B8A0A3;
+      --border:  #F0DDD9;
+      --bg:      #F7EDEA;
+      --white:   #FAF5F2;
+      --accent:  #E8B4B8;
+      --cta:     #C4737A;
+      --cta-txt: #ffffff;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      color: var(--black);
+      background: #ffffff;
+      line-height: 1.6;
+      font-size: 17px;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 72px 0; }
+    section + section { border-top: 1px solid var(--border); }
+
+    /* ── Nav ── */
+    nav {
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    /* ── Hero ── */
+    .hero { padding: 96px 0 80px; text-align: left; }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 20px;
+    }
+
+    .hero .sub {
+      font-size: 1.15rem;
+      color: var(--dark);
+      line-height: 1.55;
+      max-width: 560px;
+      margin-bottom: 36px;
+    }
+
+    /* ── CTA Button ── */
+    .btn {
+      display: inline-block;
+      background: var(--cta);
+      color: var(--cta-txt);
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 6px;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.85; }
+
+    .btn-note {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: var(--light);
+    }
+
+    /* ── Ideal for ── */
+    .ideal-for h2 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 24px;
+    }
+
+    .ideal-for ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .ideal-for li {
+      padding-left: 20px;
+      position: relative;
+      color: var(--dark);
+      font-size: 1.05rem;
+    }
+
+    .ideal-for li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--light);
+    }
+
+    /* ── How it works ── */
+    .how h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 36px;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .step-num {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--light);
+      padding-top: 2px;
+    }
+
+    .step-body strong {
+      display: block;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 4px;
+    }
+
+    .step-body p {
+      font-size: 0.95rem;
+      color: var(--mid);
+      line-height: 1.5;
+    }
+
+    /* ── Quote ── */
+    .quote-section { background: var(--white); }
+
+    blockquote {
+      font-size: 1.25rem;
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--black);
+      font-style: italic;
+      border-left: 3px solid var(--accent);
+      padding-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .quote-attr {
+      font-size: 0.9rem;
+      color: var(--light);
+      padding-left: 27px;
+    }
+
+    /* ── Pricing ── */
+    .pricing h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .pricing .price-line {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin: 20px 0 4px;
+    }
+
+    .pricing .price-context {
+      font-size: 0.95rem;
+      color: var(--mid);
+      margin-bottom: 28px;
+    }
+
+    .pricing-details {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+
+    .pricing-details li {
+      font-size: 0.95rem;
+      color: var(--dark);
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .pricing-details li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--black);
+      font-weight: 700;
+    }
+
+    /* ── Close ── */
+    .close { text-align: center; }
+
+    .close h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .close p {
+      color: var(--mid);
+      margin-bottom: 32px;
+      font-size: 1rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 32px 24px;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--light);
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 52px 0; }
+      .hero { padding: 64px 0 52px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a class="logo" href="#">Fit Check</a>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <div class="container">
+    <section class="hero">
+      <h1>Does this actually look good on&nbsp;me?</h1>
+      <p class="sub">
+        Fit Check gives you honest, specific styling feedback on any outfit so you stop buying
+        things you'll never wear.
+      </p>
+      <a class="btn" href="#">Start free, no card required</a>
+      <span class="btn-note">8 free sessions. Takes 30 seconds.</span>
+    </section>
+  </div>
+
+  <!-- ── IDEAL FOR ── -->
+  <div class="container">
+    <section class="ideal-for">
+      <h2>This is for you if</h2>
+      <ul>
+        <li>You shop alone and second-guess yourself at checkout.</li>
+        <li>You've bought things online that were the right size but never got worn.</li>
+        <li>You know certain colors wash you out and keep buying them anyway.</li>
+        <li>The person you'd trust to be honest isn't in the fitting room with you.</li>
+        <li>You've asked a friend and could tell they were just being nice.</li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- ── HOW IT WORKS ── -->
+  <div class="container">
+    <section class="how">
+      <h2>Honest feedback in three steps.</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">01</span>
+          <div class="step-body">
+            <strong>Take a photo.</strong>
+            <p>Fitting room, mirror at home, before you go out. Wherever you are when the question is "does this actually work on me?"</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <div class="step-body">
+            <strong>Get a real answer.</strong>
+            <p>Not "you look great." Specific: does this work on your frame? What isn't working and why? Would you actually wear this again?</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <div class="step-body">
+            <strong>It gets better the more you use it.</strong>
+            <p>Fit Check learns your proportions, your coloring, and what works on your body. Session 8 is more useful than session 1.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── SOCIAL PROOF ── -->
+  <div class="quote-section">
+    <div class="container">
+      <section>
+        <blockquote>
+          "I kind of do need people to tell me what it looks like, because I can't see.
+          I can't get a 360 of myself sometimes."
+        </blockquote>
+        <p class="quote-attr">Early interviewee, 20s</p>
+      </section>
+    </div>
+  </div>
+
+  <!-- ── PRICING ── -->
+  <div class="container">
+    <section class="pricing">
+      <h2>Try it free. Pay only if it's worth it.</h2>
+
+      <div class="price-line">$9<span style="font-size:1.1rem;font-weight:400;color:#999">/month</span></div>
+      <p class="price-context">after 8 free sessions. Less than most items you've bought and never worn.</p>
+
+      <ul class="pricing-details">
+        <li>8 full sessions free. No card required.</li>
+        <li>Feedback on any outfit, any time</li>
+        <li>Your profile builds with every session</li>
+        <li>Cancel anytime, no questions asked</li>
+      </ul>
+
+      <a class="btn" href="#">Start free. 8 sessions, no card required.</a>
+    </section>
+  </div>
+
+  <!-- ── CLOSE ── -->
+  <div class="container">
+    <section class="close">
+      <h2>Stop asking if you look okay.<br>Know.</h2>
+      <p>When you know it actually works on you, you stop second-guessing yourself at the door.</p>
+      <p style="color:#999; margin-top:8px; font-size:0.95rem;">8 free sessions. No card. No commitment.</p>
+      <a class="btn" href="#">Start free</a>
+      <span class="btn-note">Join the early access waitlist</span>
+    </section>
+  </div>
+
+  <footer>
+    <p>© 2026 Fit Check &nbsp;·&nbsp; Built for BUS 395: Venture Creation with AI</p>
+  </footer>
+
+</body>
+</html>
