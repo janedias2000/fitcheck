@@ -91,7 +91,7 @@ The more she uses it, the more it learns her proportions, her coloring, what wor
 
 ## Revenue Model
 
-**Free trial → monthly subscription at $7/month (testing $9). No ads at any tier.**
+**Free trial → monthly subscription at $12/month (raised from $9 based on Van Westendorp data — all 5 Round 2 interviewees said yes to $9, which signals underpricing; good deal threshold averaged $14–15). No ads at any tier.**
 
 - 8 sessions free — full functionality, full profile building
 - At the session limit, paywall: pay $7/month to keep the profile and continue, or stop
