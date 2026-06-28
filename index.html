@@ -249,6 +249,80 @@
       font-size: 1rem;
     }
 
+    /* ── Signup Form ── */
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 420px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .signup-form input[type="text"],
+    .signup-form input[type="email"] {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 1rem;
+      color: var(--black);
+      background: #fff;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .signup-form input:focus {
+      border-color: var(--cta);
+    }
+
+    .signup-form button {
+      width: 100%;
+      background: var(--cta);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      letter-spacing: -0.01em;
+      transition: opacity 0.15s;
+    }
+
+    .signup-form button:hover { opacity: 0.85; }
+
+    .form-note {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--light);
+      margin-top: 4px;
+    }
+
+    /* ── Thank-you banner ── */
+    .thank-you {
+      display: none;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 28px;
+      text-align: center;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .thank-you h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .thank-you p {
+      font-size: 0.95rem;
+      color: var(--mid);
+      margin-bottom: 0;
+    }
+
     /* ── Footer ── */
     footer {
       padding: 32px 24px;
@@ -279,7 +353,7 @@
         Fit Check gives you honest, specific styling feedback on any outfit so you stop buying
         things you'll never wear.
       </p>
-      <a class="btn" href="#">Start free, no card required</a>
+      <a class="btn" href="#signup">Get early access</a>
       <span class="btn-note">8 free sessions. Takes 30 seconds.</span>
     </section>
   </div>
@@ -356,24 +430,57 @@
         <li>Cancel anytime, no questions asked</li>
       </ul>
 
-      <a class="btn" href="#">Start free. 8 sessions, no card required.</a>
+      <a class="btn" href="#signup">Start free. 8 sessions, no card required.</a>
     </section>
   </div>
 
-  <!-- ── CLOSE ── -->
+  <!-- ── CLOSE / SIGNUP ── -->
   <div class="container">
-    <section class="close">
+    <section class="close" id="signup">
       <h2>Stop asking if you look okay.<br>Know.</h2>
       <p>When you know it actually works on you, you stop second-guessing yourself at the door.</p>
-      <p style="color:#999; margin-top:8px; font-size:0.95rem;">8 free sessions. No card. No commitment.</p>
-      <a class="btn" href="#">Start free</a>
-      <span class="btn-note">Join the early access waitlist</span>
+      <p style="color:#999; margin-top:8px; margin-bottom:32px; font-size:0.95rem;">Join the early access waitlist. Free to start.</p>
+
+      <!-- Thank-you state (shown after redirect with ?success=1) -->
+      <div class="thank-you" id="thank-you">
+        <h3>You're on the list.</h3>
+        <p>We'll reach out when early access opens. Check your inbox for a confirmation.</p>
+      </div>
+
+      <!-- Signup form -->
+      <form
+        class="signup-form"
+        id="signup-form"
+        action="https://api.web3forms.com/submit"
+        method="POST"
+      >
+        <!-- Web3Forms config -->
+        <input type="hidden" name="access_key" value="3b2302e9-9bb8-4973-8395-50fe53acc267" />
+        <input type="hidden" name="subject" value="New Fit Check waitlist signup" />
+        <input type="hidden" name="redirect" value="https://fitcheck-cnb.pages.dev/?success=1" />
+
+        <!-- Honeypot spam protection -->
+        <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off" />
+
+        <input type="text"  name="name"  placeholder="Your name"  required />
+        <input type="email" name="email" placeholder="Your email" required />
+        <button type="submit">Join the waitlist</button>
+        <p class="form-note">No card required &nbsp;·&nbsp; 8 free sessions &nbsp;·&nbsp; Cancel anytime</p>
+      </form>
     </section>
   </div>
 
   <footer>
     <p>© 2026 Fit Check &nbsp;·&nbsp; Built for BUS 395: Venture Creation with AI</p>
   </footer>
+
+  <script>
+    if (new URLSearchParams(window.location.search).get('success') === '1') {
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('thank-you').style.display = 'block';
+      document.getElementById('signup').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
 
 </body>
 </html>
